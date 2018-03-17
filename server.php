@@ -34,10 +34,7 @@ class myswoole{
         $this->ws->on('open', function($ws, $request){
             echo "【date：".date("Y-m-d H:i:s",time())."】client ".$request->fd." has established...\n";
             $msg = $this->red->lrange(date("Y-m-d",time()),0,-1);
-            foreach ($msg as $data){
-                $this->ws->push($request->fd,json_encode((object)$data));
-                usleep(500000);
-            }
+            $this->ws->push($request->fd,json_encode((object)$msg));
         });
         //监听WebSocket消息事件
         $this->ws->on('message', function($ws, $frame){

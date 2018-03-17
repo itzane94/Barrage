@@ -40,9 +40,12 @@
       //监听返回结果
       websocket.onmessage = function (evt){
           var data = JSON.parse(evt.data);
-          console.log(data);
+          //console.log(data);
           for(var i in data){
-              barrageWall.upWall("images/aq.png","我是说话人",data[i]);//初始化弹幕墙
+              setTimeout(function(){
+                  //barrageWall.upWall("images/aq.png","我是说话人",data[i]);//初始化弹幕墙
+                  barrageWall.upWall("images/aq.png","itzane",data[i]);//初始化弹幕墙
+              },i*1000 );
           }
       }
     //////////////////////////////////////////////////////////////////////
