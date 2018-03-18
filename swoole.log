@@ -8,3 +8,10 @@
 [2018-03-18 12:39:18 *22977.0]	NOTICE	swFactoryProcess_finish (ERROR 1004): send 41 byte failed, because connection[fd=1] is closed.
 [2018-03-18 12:39:42 *22978.1]	NOTICE	swFactoryProcess_finish (ERROR 1004): send 41 byte failed, because connection[fd=3] is closed.
 [2018-03-18 12:45:41 *22977.0]	NOTICE	swFactoryProcess_finish (ERROR 1004): send 41 byte failed, because connection[fd=2] is closed.
+[2018-03-18 13:02:19 *22980.3]	WARNING	swSignalfd_onSignal: signal[1] callback is null.
+[2018-03-18 13:02:19 *22980.3]	WARNING	swSignalfd_onSignal: signal[1] callback is null.
+[2018-03-18 13:02:19 *22979.2]	WARNING	swSignalfd_onSignal: signal[1] callback is null.
+[2018-03-18 13:02:19 *22977.0]	WARNING	swSignalfd_onSignal: signal[1] callback is null.
+[2018-03-18 13:02:19 $22972.0]	WARNING	swSignal_callback: signal[1] callback is null.
+[2018-03-18 13:02:19 *22978.1]	WARNING	swSignalfd_onSignal: signal[1] callback is null.
+[2018-03-18 13:02:19 #22971.4]	WARNING	swSignalfd_onSignal: signal[1] callback is null.
