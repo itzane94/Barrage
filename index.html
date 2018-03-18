@@ -4,19 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <title>弹幕</title>
-    <link rel="stylesheet" href="wall.css"/>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <title>留言板弹幕</title>
+    <link rel="stylesheet" href="css/wall.css"/>
 </head>
 <body>
 <div id="container" class="container">
+    <div id="infoboard">
+        总访问量：<span id="totalV"></span> <br/>
+        当前在线：<span id="online"></span> <br/>
+        总留言量：<span id="totalM"></span> <br/>
+    </div>
 </div>
 <div class="input-box">
     <!--限制用户输入的文字长度，尽量避免用户输入的内容长度超过屏幕的宽度-->
-    <input type="text" maxlength="20" placeholder="说点什么吧~">
+    <input type="text" maxlength="20" placeholder="say something~">
     <button id="btn" class="btn">发送</button>
 </div>
-<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-<script src="barrageWall.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/barrageWall.js"></script>
 <script>
   $(function () {
     //////////////////////////////////////////////////////////////////////
@@ -35,19 +41,30 @@
       var wsServer = "ws://127.0.0.1:9502";
       websocket = new WebSocket(wsServer);
       websocket.onopen = function(evt){
-          console.log(websocket.readyState+' websocket service established...');
+          //console.log(websocket.readyState+' websocket service established...');
       }
       //监听返回结果
       websocket.onmessage = function (evt){
           var data = JSON.parse(evt.data);
+          if(data['online']){
+            $('#totalV').text(data['totalV']);
+            $('#online').text(data['online']);
+            $('#totalM').text(data['totalM']);
+            return;
+          }
           //console.log(data);
           for(var i in data){
+              var j = 0;
               setTimeout(function(){
                   //barrageWall.upWall("images/aq.png","我是说话人",data[i]);//初始化弹幕墙
-                  barrageWall.upWall("images/aq.png","itzane",data[i]);//初始化弹幕墙
+                 barrageWall.upWall(data[j]['id'],data[j]['grava'],data[j]['message']);//初始化弹幕墙
+                  j++;
               },i*1000 );
           }
       }
+      websocket.onclose = function () {
+          //something
+      };
     //////////////////////////////////////////////////////////////////////
     /////// 实际调用时必须设置你的 弹幕墙id 和 弹幕的行数 并 初始化弹幕墙，///////
     // 然后调用 barrageWall.upWall("用户头像url","用户昵称","用户输入的内容")//
